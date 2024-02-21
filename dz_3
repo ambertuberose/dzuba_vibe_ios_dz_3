@@ -1,0 +1,67 @@
+// Сортировка массива с помощью замыкания по возрастанию
+var array = [5, 2, 8, 1, 9, 123, 102948, -3, 0, 12, 34]
+array.sort { $0 < $1 }
+print("Отсортированный массив по возрастанию: \(array)")
+
+// Сортировка массива по убыванию
+array.sort { $0 > $1 }
+print("Отсортированный массив по убыванию: \(array)")
+
+// Метод для добавления элементов String в массив
+func addFriendsToArray(names: String...) -> [String] {
+    var friendsArray = [String]()
+    for name in names {
+        friendsArray.append(name)
+    }
+    return friendsArray
+}
+
+// Пример использования метода
+let friendsArray = addFriendsToArray(names: "Валентина", "Катя", "Ян", "Гор", "Савелий", "Ульяна", "Владлен")
+print("Массив имен друзей: \(friendsArray)")
+
+// Метод для сортировки массива имен по количеству букв
+func sortNamesByLength(_ names: [String]) -> [String] {
+    return names.sorted { $0.count < $1.count }
+}
+
+// Сортировка массива имен по количеству букв
+let sortedNames = sortNamesByLength(friendsArray)
+print("Массив отсортированных имен друзей по возрастанию количества символов в имени: \(sortedNames)")
+
+// Создание словаря, где ключ - количество символов в имени, значение - имя друга
+var namesDictionary = [Int: String]()
+for name in sortedNames {
+    namesDictionary[name.count] = name
+}
+
+// Функция для вывода ключа и значения из словаря
+func printKeyValue(_ key: Int) {
+    if let name = namesDictionary[key] {
+        print("Ключ: \(key), Значение: \(name)")
+    } else {
+        print("Нет значения для ключа \(key)")
+    }
+}
+
+// Вызов функции для вывода ключа и значения из словаря
+printKeyValue(2)
+
+// Функция для проверки и добавления значений в массивы, если они пустые
+func checkAndFillArrays(stringArray: inout [String], intArray: inout [Int]) {
+    if stringArray.isEmpty {
+        print("Строковый массив пуст")
+        stringArray.append("Строка 1")
+        print("Строковый массив: \(stringArray)")
+    }
+    if intArray.isEmpty {
+        print("Целочисленный массив пуст")
+        intArray.append(15112002)
+        print("Целочисленный массив: \(intArray)")
+    }
+}
+
+// Вызов функции checkAndFillArrays
+var emptyStringArray = [String]()
+var emptyIntArray = [Int]()
+checkAndFillArrays(stringArray: &emptyStringArray, intArray: &emptyIntArray)
